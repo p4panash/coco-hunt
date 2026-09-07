@@ -120,15 +120,15 @@ const THE_STOP: Checkpoint = {
   id: 1,
   name: "Easybox Falticeni",
   teaser:
-    "your entire hunt fits in one clue: Falticeni is three streets and a lake. head for the big shop on the main drag — your gift is in the parcel locker out front.",
+    "your whole hunt is one clue. Falticeni is three streets and a lake, and they all knot together in the same spot — go stand in that knot. the parcel locker is right there, waiting for you.",
   realHint:
-    "it's the Easybox by REPLACE_ME (store), on REPLACE_ME (street). the one you walk past every single time you go for bread.",
+    "the Easybox in the dead centre of town, by REPLACE_ME (store) on the main square — the one you pass every time you cut across.",
   // Falticeni town centre — REPLACE with the real Easybox coordinates.
   lat: 47.4592,
   lng: 26.3006,
   radiusMeters: 40,
-  code: "FALTICENI",
-  successCopy: "you're here. now the easy part.",
+  code: "BULLSEYE",
+  successCopy: "bullseye. now the easy part.",
 };
 
 export const config: HuntConfig = {

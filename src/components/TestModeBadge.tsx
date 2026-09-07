@@ -59,9 +59,7 @@ export default function TestModeBadge({ dispatch, currentN }: Props) {
               <Section title="jump to step">
                 <Btn onClick={() => dispatch({ type: 'JUMP_TO_STEP', step: { kind: 'intro' } })}>intro</Btn>
                 <Btn onClick={() => dispatch({ type: 'JUMP_TO_STEP', step: { kind: 'gps-preface' } })}>gps preface</Btn>
-                <Btn onClick={() => dispatch({ type: 'JUMP_TO_STEP', step: { kind: 'location', n: 0 } })}>location 1</Btn>
-                <Btn onClick={() => dispatch({ type: 'JUMP_TO_STEP', step: { kind: 'location', n: 1 } })}>location 2</Btn>
-                <Btn onClick={() => dispatch({ type: 'JUMP_TO_STEP', step: { kind: 'location', n: 2 } })}>location 3</Btn>
+                <Btn onClick={() => dispatch({ type: 'JUMP_TO_STEP', step: { kind: 'location', n: 0 } })}>the clue</Btn>
                 <Btn onClick={() => dispatch({ type: 'JUMP_TO_STEP', step: { kind: 'finale' } })}>finale</Btn>
               </Section>
 
@@ -69,7 +67,7 @@ export default function TestModeBadge({ dispatch, currentN }: Props) {
                 <Btn
                   onClick={() => {
                     if (currentN == null) return;
-                    const cp = config.checkpoints[currentN];
+                    const cp = config.checkpoints[0];
                     setMockGeo({ lat: cp.lat, lng: cp.lng, accuracy: 5 });
                   }}
                   disabled={currentN == null}
