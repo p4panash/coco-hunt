@@ -1,0 +1,95 @@
+/**
+ * Hunt state machine.
+ *
+ * Strict linear flow: intro → gps-preface → location(0) → reveal(0)
+ *                  → location(1) → reveal(1) → location(2) → reveal(2) → finale
+ *
+ * Photo interstitials are inserted between reveal(n) and location(n+1) only
+ * if config.photos has an entry with afterStep === n. With config.photos === []
+ * (v1 default) the reveal → next-location transition is direct.
+ *
+ * The schema version is encoded in STORAGE_KEY; bump if HuntState shape changes.
+ */
+
+export type CheckpointIndex = 0 | 1 | 2;
+
+export type HuntStep =
+  | { kind: 'intro' }
+  | { kind: 'gps-preface' }
+  | { kind: 'location'; n: CheckpointIndex }
+  | { kind: 'reveal'; n: CheckpointIndex }
+  | { kind: 'photo'; afterN: CheckpointIndex }
+  | { kind: 'finale' };
+
+export type HuntState = {
+  step: HuntStep;
+  unlocked: [boolean, boolean, boolean];
+  startedAt: number | null;
+  testMode: boolean;
+};
+
+export type HuntAction =
+  | { type: 'START_HUNT' }
+  | { type: 'GRANT_GPS' }
+  | { type: 'UNLOCK_CHECKPOINT'; n: CheckpointIndex }
+  | { type: 'REVEAL_COMPLETE'; n: CheckpointIndex; hasPhotoAfter: boolean }
+  | { type: 'PHOTO_DONE'; afterN: CheckpointIndex }
+  | { type: 'RESET' }
+  | { type: 'JUMP_TO_STEP'; step: HuntStep };
+
+export const STORAGE_KEY = 'coco-hunt-v1';
+
+export const initialState: HuntState = {
+  step: { kind: 'intro' },
+  unlocked: [false, false, false],
+  startedAt: null,
+  testMode: false,
+};
+
+export function huntReducer(state: HuntState, action: HuntAction): HuntState {
+  switch (action.type) {
+    case 'START_HUNT':
+      return {
+        ...state,
+        step: { kind: 'gps-preface' },
+        startedAt: state.startedAt ?? Date.now(),
+      };
+
+    case 'GRANT_GPS':
+      return { ...state, step: { kind: 'location', n: 0 } };
+
+    case 'UNLOCK_CHECKPOINT': {
+      const unlocked = [...state.unlocked] as HuntState['unlocked'];
+      unlocked[action.n] = true;
+      return { ...state, step: { kind: 'reveal', n: action.n }, unlocked };
+    }
+
+    // Single stop: after the reveal there is nowhere to go but the finale.
+    case 'REVEAL_COMPLETE': {
+      if (action.hasPhotoAfter) {
+        return { ...state, step: { kind: 'photo', afterN: action.n } };
+      }
+      return { ...state, step: { kind: 'finale' } };
+    }
+
+    case 'PHOTO_DONE':
+      return { ...state, step: { kind: 'finale' } };
+
+    case 'JUMP_TO_STEP':
+      return { ...state, step: action.step };
+
+    case 'RESET':
+      return { ...initialState, testMode: state.testMode };
+
+    default:
+      return state;
+  }
+}
+
+/** Type guard for screen routing. */
+export function isStepKind<K extends HuntStep['kind']>(
+  step: HuntStep,
+  kind: K,
+): step is Extract<HuntStep, { kind: K }> {
+  return step.kind === kind;
+}

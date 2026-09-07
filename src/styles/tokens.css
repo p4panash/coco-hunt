@@ -1,0 +1,56 @@
+:root {
+  /* ---------- Night Sky palette ----------
+     Cozy midnight blue with a warm candle-amber accent. Deliberately NOT the
+     black + hazard-yellow of a certain space opera — no spoilers yet. The
+     token names still say "coral"/"cream" so the shared components don't need
+     touching; only the values changed. */
+  --bg: #0B1026;
+  --surface: #141C3A;
+  --surface-2: #1F2A4E;
+  --coral: #F0A868;        /* warm amber — primary accent */
+  --coral-soft: #F7C08D;
+  --cream: #EDE7D6;        /* soft parchment — headings */
+  --text: #E7EBF7;         /* cool near-white — body */
+  --muted: #7E88B4;        /* slate blue */
+  --warmer: #FFB347;
+  --colder: #7CA9FF;
+  --shadow-glow: 0 0 24px rgba(240, 168, 104, 0.4);
+
+  /* ---------- Type ---------- */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: 'Inter', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-hand: 'Caveat', cursive;
+
+  /* tabular numbers for the countdown so digits don't dance */
+  --tnum: "tnum" 1, "lnum" 1;
+
+  /* ---------- Spacing ---------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+
+  /* ---------- Radius ---------- */
+  --rad-sm: 6px;
+  --rad-md: 12px;
+  --rad-lg: 20px;
+  --rad-pill: 999px;
+
+  /* ---------- Easings (Michael Reeves vibes) ---------- */
+  --ease-bounce: cubic-bezier(.34, 1.56, .64, 1);
+  --ease-elastic: cubic-bezier(.68, -.55, .27, 1.55);
+  --ease-out-soft: cubic-bezier(.22, 1, .36, 1);
+  --ease-in-derpy: cubic-bezier(.8, 0, .9, .5);
+
+  /* ---------- Z-index scale ---------- */
+  --z-banner: 50;
+  --z-sheet: 80;
+  --z-toast: 90;
+  --z-test: 100;
+  --z-modal: 110;
+}
