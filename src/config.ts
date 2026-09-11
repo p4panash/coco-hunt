@@ -6,13 +6,18 @@
  * before launch; the rest of the app reads from this object.
  *
  * This is the SINGLE-STOP cut of birthday-hunt: one clue, straight to the
- * Easybox. (The type still carries three checkpoint slots so the shared
+ * locker. (The type still carries three checkpoint slots so the shared
  * components compile unchanged — only slot 0 is ever reached. Leave [1] and
  * [2] as-is.)
  *
+ * The hunt now opens with a Star Wars-style crawl + "HAPPY BIRTHDAY" reveal
+ * (merged in from the old two-package plan's phase 2 — see intro.crawl /
+ * intro.greeting / intro.heroLine / intro.subtitle below) before handing off
+ * to the GPS gate and the one clue.
+ *
  * Copy supports [VAR] template substitution — see `src/lib/tpl.ts`. The only
  * substituted var is FRIEND_NAME, and only in strings passed through tpl()
- * (currently: intro.headline, checkpoint teaser/realHint).
+ * (currently: intro.greeting, checkpoint teaser/realHint).
  */
 
 export type Checkpoint = {
@@ -42,8 +47,18 @@ export type HuntConfig = {
   friendName: string;
 
   intro: {
-    eyebrow: string;
-    headline: string;
+    /** The opening crawl, played before anything else. */
+    crawl: {
+      episode: string;
+      title: string;
+      paragraphs: string[];
+    };
+    /** Small line above the hero, e.g. "hey [FRIEND_NAME]". */
+    greeting: string;
+    /** The hero — biggest thing on the post-crawl screen ("Happy Birthday"). */
+    heroLine: string;
+    /** Small line under the hero — the one place a gift hint can live. */
+    subtitle: string;
     body: string;
     cta: string;
     finePrint: string;
@@ -114,16 +129,20 @@ export type HuntConfig = {
   };
 };
 
-// The single stop: the Easybox itself. Replace lat/lng/code/hint with the real
-// locker before launch.
+// The single stop: the locker itself (internal label only, never shown).
+// TODO: confirmed destination is the DPD locker at Penny, Obor, Falticeni —
+// still need real lat/lng, and to revisit teaser/realHint wording for that
+// specific spot (Penny Obor may not read as "dead centre of town" — check
+// together before launch).
 const THE_STOP: Checkpoint = {
   id: 1,
-  name: "Easybox Falticeni",
+  name: "DPD Locker - Penny, Obor, Falticeni",
   teaser:
     "your whole hunt is one clue. Falticeni is three streets and a lake, and they all knot together in the same spot — go stand in that knot. the parcel locker is right there, waiting for you.",
   realHint:
-    "the Easybox in the dead centre of town, by REPLACE_ME (store) on the main square — the one you pass every time you cut across.",
-  // Falticeni town centre — REPLACE with the real Easybox coordinates.
+    "the locker by REPLACE_ME (store) on REPLACE_ME (street) — the one you pass every time you cut across.",
+  // Falticeni town centre — PLACEHOLDER. REPLACE with the real DPD locker
+  // coordinates at Penny, Obor, Falticeni before launch.
   lat: 47.4592,
   lng: 26.3006,
   radiusMeters: 40,
@@ -135,9 +154,20 @@ export const config: HuntConfig = {
   friendName: "Coco",
 
   intro: {
-    eyebrow: "happy birthday",
-    headline: "[FRIEND_NAME]. we hid your gift. this one's quick.",
-    body: "normally there'd be a whole hunt — stops, clues, you sweating on a bike. but Falticeni is three streets and a lake. so: one clue, one locker. don't overthink it.",
+    crawl: {
+      episode: "Episode IX",
+      title: "The Phantom Package",
+      paragraphs: [
+        "You've made it another trip around the sun. The gang was never going to let that pass quietly.",
+        "There's a gift. It's real, it's wrapped, and it's sitting in a locker with your name already on it.",
+        "Normally this is where a whole hunt begins — stops, clues, you sweating on a bike. But Falticeni is three streets and a lake, so the gang skipped straight to the good part.",
+        "One clue. One locker. This transmission carries the only one you get.",
+      ],
+    },
+    greeting: "hey [FRIEND_NAME]",
+    heroLine: "Happy Birthday",
+    subtitle: "Episode X · The Gift Awakens",
+    body: "Falticeni is three streets and a lake, so: one clue, one locker. don't overthink it.",
     cta: "give me the clue →",
     finePrint: "",
   },
@@ -188,15 +218,18 @@ export const config: HuntConfig = {
     subheadline: "one locker, one code, one you. scan to open it.",
     lockerHintLabel: "you're standing at:",
     instruction:
-      "hold the QR up to the Easybox scanner. try to look normal doing it.",
+      "hold the QR up to the locker's scanner. try to look normal doing it.",
     qrBrightnessTip: "crank your screen brightness so the scanner reads it.",
     openLockerMapLabel: "open in maps",
   },
 
+  // TODO: confirmed destination is the DPD locker at Penny, Obor, Falticeni —
+  // fill in the exact street/nr and swap mapsUrl for a pinned location once
+  // we've looked at it together.
   easyboxLocation: {
-    name: "Easybox Falticeni — REPLACE_ME (store)",
+    name: "DPD Locker — Penny, Obor, Falticeni",
     hint: "REPLACE_ME (street), nr. REPLACE_ME. the locker right by the entrance. yes, that one.",
-    mapsUrl: "https://maps.google.com/?q=easybox+falticeni",
+    mapsUrl: "https://maps.google.com/?q=Penny+Obor+Falticeni",
   },
 
   errors: {
