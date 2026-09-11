@@ -30,8 +30,8 @@ One file. Replace every `REPLACE_ME`, and see the `TODO` comments near `THE_STOP
 
 - `friendName`
 - `intro.crawl` / `greeting` / `heroLine` / `subtitle` / `body` — the cold open. `subtitle` is the one place a gift hint can live (currently "Episode X · The Gift Awakens" — no spoilers).
-- `checkpoints[0]` → the locker: `teaser` (the clue he sees — **needs a rewrite for the real spot, DPD @ Penny, Obor, Fălticeni**), `realHint` (plainer, in the "stuck?" sheet), `lat` / `lng` / `radiusMeters` (still Fălticeni-centre placeholders), `code` (manual fallback, currently `BULLSEYE`). **Leave `[1]` and `[2]`** — unused filler so the shared 3-slot types still compile.
-- `easyboxLocation` → `name` / `hint` / `mapsUrl` shown on the finale — name is set to the DPD/Penny/Obor locker, street + pin still needed.
+- `checkpoints[0]` → the locker: `teaser` and `realHint` are written for the confirmed real spot (Penny supermarket, **Str. Oborului**, Fălticeni — "Oborului" = the old cattle-fair street, that's the riddle). **`lat`/`lng` are still a Fălticeni town-centre placeholder** — free geocoders (Nominatim, Photon) have no POI data for this address, so someone needs to drop a real pin: open the spot in Google Maps, long-press it, and copy the decimal coordinates it shows (or read your phone's GPS while standing there). Get this wrong and the GPS gate won't unlock in the right place. `code` is the manual fallback, currently `BULLSEYE`. **Leave `[1]` and `[2]`** — unused filler so the shared 3-slot types still compile.
+- `easyboxLocation` → `name` / `hint` shown on the finale are set to the confirmed address; `mapsUrl` is a name+city search (works fine on Google's own index) — swap for a pinned drop once you've confirmed the exact spot, same as the lat/lng above.
 - `deadlineISO` → when the locker returns the parcel (drives the countdown)
 - `public/qr.jpg` → replace with the real locker QR image
 

@@ -130,19 +130,26 @@ export type HuntConfig = {
 };
 
 // The single stop: the locker itself (internal label only, never shown).
-// TODO: confirmed destination is the DPD locker at Penny, Obor, Falticeni —
-// still need real lat/lng, and to revisit teaser/realHint wording for that
-// specific spot (Penny Obor may not read as "dead centre of town" — check
-// together before launch).
+// Confirmed real address: Penny supermarket, Str. Oborului, Falticeni
+// (checked live — see chat). "Oborului" is the genitive of "obor", an old
+// word for a livestock/cattle market — that's the hook the teaser below
+// leans on, without spelling out the street name outright.
+//
+// TODO before launch: lat/lng below are STILL a Falticeni town-centre
+// placeholder, not the real Penny location — free geocoders (Nominatim,
+// Photon) have no POI data for this address, so it needs a human: open the
+// spot in Google Maps, long-press the exact point, and copy the decimal
+// coordinates it shows (or just read your phone's GPS while standing
+// there). Get this wrong and the GPS gate either never unlocks or unlocks
+// somewhere else — it's the one field that can't be guessed.
 const THE_STOP: Checkpoint = {
   id: 1,
-  name: "DPD Locker - Penny, Obor, Falticeni",
+  name: "DPD Locker - Penny, Str. Oborului, Falticeni",
   teaser:
-    "your whole hunt is one clue. Falticeni is three streets and a lake, and they all knot together in the same spot — go stand in that knot. the parcel locker is right there, waiting for you.",
+    "your whole hunt is one clue. head for the street that still carries the name of Falticeni's old cattle fair — the cows are long gone, there's a supermarket there now, and your locker is parked right outside it.",
   realHint:
-    "the locker by REPLACE_ME (store) on REPLACE_ME (street) — the one you pass every time you cut across.",
-  // Falticeni town centre — PLACEHOLDER. REPLACE with the real DPD locker
-  // coordinates at Penny, Obor, Falticeni before launch.
+    "it's the Penny on Str. Oborului. the locker's right by the entrance.",
+  // Falticeni town centre — PLACEHOLDER, see TODO above.
   lat: 47.4592,
   lng: 26.3006,
   radiusMeters: 40,
@@ -223,13 +230,16 @@ export const config: HuntConfig = {
     openLockerMapLabel: "open in maps",
   },
 
-  // TODO: confirmed destination is the DPD locker at Penny, Obor, Falticeni —
-  // fill in the exact street/nr and swap mapsUrl for a pinned location once
-  // we've looked at it together.
+  // Confirmed real address (checked live): Penny, Str. Oborului, Falticeni,
+  // 725200. mapsUrl is a name+city search, which resolves fine on Google's
+  // own index even though free geocoders don't have this POI — swap it for
+  // a pinned drop (long-press the spot -> Share -> copy link) once you've
+  // confirmed the exact locker position for real, same as the lat/lng TODO
+  // on THE_STOP above.
   easyboxLocation: {
-    name: "DPD Locker — Penny, Obor, Falticeni",
-    hint: "REPLACE_ME (street), nr. REPLACE_ME. the locker right by the entrance. yes, that one.",
-    mapsUrl: "https://maps.google.com/?q=Penny+Obor+Falticeni",
+    name: "DPD Locker — Penny, Str. Oborului, Falticeni",
+    hint: "Str. Oborului, fn (Penny's parking lot). the locker right by the entrance. yes, that one.",
+    mapsUrl: "https://maps.google.com/?q=Penny+Falticeni+Strada+Oborului",
   },
 
   errors: {
