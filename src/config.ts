@@ -148,7 +148,7 @@ const THE_STOP: Checkpoint = {
   teaser:
     "your whole hunt is one clue. head for the street that still carries the name of Falticeni's old cattle fair — the cows are long gone, there's a supermarket there now, and your locker is parked right outside it.",
   realHint:
-    "how many DPD lockers do you honestly think Falticeni has? there's one. it's outside the Penny on Str. Oborului. the locker's right by the entrance.",
+    "how many parcel lockers do you honestly think this town has? there's one — outside the discount grocery everyone already shops at, on the cattle-fair street we already mentioned. you'll know it when you see it.",
   // Falticeni town centre — PLACEHOLDER, see TODO above.
   lat: 47.4592,
   lng: 26.3006,
