@@ -146,9 +146,9 @@ const THE_STOP: Checkpoint = {
   id: 1,
   name: "DPD Locker - Penny, Str. Oborului, Falticeni",
   teaser:
-    "your whole hunt is one clue. head for the street that still carries the name of Falticeni's old cattle fair — the cows are long gone, there's a supermarket there now, and your locker is parked right outside it.",
+    "your whole hunt is one clue. head for the street that still carries the name of Falticeni's old cattle fair — the cows are long gone, but it's still basically a marketplace, just with fewer cows and more parking.",
   realHint:
-    "how many parcel lockers do you honestly think this town has? there's one — outside the discount grocery everyone already shops at, on the cattle-fair street we already mentioned. you'll know it when you see it.",
+    "there aren't many lockers around here. yours is outside the discount grocery on that cattle-fair street. you'll spot it.",
   // Falticeni town centre — PLACEHOLDER, see TODO above.
   lat: 47.4592,
   lng: 26.3006,
@@ -207,7 +207,7 @@ export const config: HuntConfig = {
 
   stuckSheet: {
     title: "stuck?",
-    realHintIntro: "ugh, fine. the plain version:",
+    realHintIntro: "here's a nudge:",
     codeLabel: "got a code? type it.",
     codePlaceholder: "----",
     unlockCta: "unlock",
