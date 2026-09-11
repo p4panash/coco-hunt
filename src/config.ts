@@ -167,7 +167,7 @@ export const config: HuntConfig = {
     greeting: "hey [FRIEND_NAME]",
     heroLine: "Happy Birthday",
     subtitle: "Episode X · The Gift Awakens",
-    body: "Falticeni is three streets and a lake, so: one clue, one locker. don't overthink it.",
+    body: "the whole plan is one clue. try to look surprised when it actually works.",
     cta: "give me the clue →",
     finePrint: "",
   },
